@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ site.nom }}</title>
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style>
+        #map {
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>{{ site.nom }}</h1>
+
+<p><strong>Adresse :</strong> {{ site.adresse }}</p>
+<p><strong>Commune :</strong> {{ site.commune }}</p>
+<p><strong>Département :</strong> {{ site.departement }}</p>
+
+<p>{{ site.description }}</p>
+
+{% if site.url_image %}
+    <img src="{{ site.url_image }}" alt="{{ site.nom }}" style="max-width:100%;">
+{% endif %}
+
+<div id="map"></div>
+
+<script>
+    var map = L.map('map').setView([{{ site.latitude }}, {{ site.longitude }}], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    L.marker([{{ site.latitude }}, {{ site.longitude }}]).addTo(map);
+</script>
+
+<p><a href="/">← Retour à la liste</a></p>
+
+</body>
+</html>

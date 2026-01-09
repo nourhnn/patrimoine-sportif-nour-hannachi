@@ -1,0 +1,47 @@
+<h1 style="color:red;">TEMPLATE SITES/HOME.HTML</h1>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Patrimoine sportif</title>
+</head>
+<body>
+
+<h1>Sites sportifs emblématiques</h1>
+
+<ul>
+    {% for site in page_obj %}
+        <li>
+            <strong>
+                <strong>
+                    <li>
+                        <a href="/site/{{ site.id }}/">
+                            {{ site.nom }} – {{ site.departement }}
+                        </a>
+                    </li>
+                    
+                </strong>
+                
+            
+            {{ site.commune }} – {{ site.departement }}
+        </li>
+    {% empty %}
+        <li>Aucun site trouvé.</li>
+    {% endfor %}
+</ul>
+
+<div>
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Précédent</a>
+    {% endif %}
+
+    Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Suivant</a>
+    {% endif %}
+</div>
+
+</body>
+</html>
